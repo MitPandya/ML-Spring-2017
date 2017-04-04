@@ -3,6 +3,7 @@ import numpy as np
 import pandas
 import mdptoolbox, mdptoolbox.example
 import argparse
+import sys
 
 # load data set with selected or extracted features, features are discrete
 # features are the columns after reward column
@@ -103,12 +104,12 @@ def calcuate_ECR(start_states, expectV):
 
 def output_policy(distinct_acts, distinct_states, vi):
     Ns = len(distinct_states)
-    print('Policy: ')
-    print('state -> action, value-function')
-    for s in range(Ns):
-        print(distinct_states[s]+ " -> " + distinct_acts[vi.policy[s]] + ", "+str(vi.V[s]))
+    #print('Policy: ')
+    #print('state -> action, value-function')
+    #for s in range(Ns):
+     #   print(distinct_states[s]+ " -> " + distinct_acts[vi.policy[s]] + ", "+str(vi.V[s]))
 
-def induce_policy_MDP():
+def induce_policy_MDP(name):
 
     # extract filename from command
 
@@ -116,7 +117,7 @@ def induce_policy_MDP():
     parser.add_argument("-input")
     args = parser.parse_args()
     filename = args.input'''
-    filename = 'Testing_data.csv'
+    filename = name
 
     # load data set with selected or extracted discrete features
     [start_states, A, expectR, distinct_acts, distinct_states] = generate_MDP_input(filename)
@@ -125,7 +126,7 @@ def induce_policy_MDP():
     # apply Value Iteration to run the MDP
     vi = mdptoolbox.mdp.ValueIteration(A, expectR, discount = 0.9)
     vi.run()
-    print(vi.policy)
+    #print(vi.policy)
     # output policy
     output_policy(distinct_acts, distinct_states, vi)
 
