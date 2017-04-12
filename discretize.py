@@ -27,11 +27,50 @@ def discretize_and_write(col):
 
 	l = len(a)
 
-	b1 = a[int(l/4)]
-	b2 = a[int(l/2)]
-	b3 = a[int(3*l/4)]
+	b1 = a[int(l/2)]
 
-	bin_list = [-np.inf,b1,b2,b3,max_value]
+	'''b1 = a[int(l/4)]
+	b2 = a[int(l/2)]
+	b3 = a[int(3*l/4)]'''
+
+	'''b1 = a[int(l/10)]
+	b2 = a[int(l/5)]
+	b3 = a[int(3*l/10)]
+	b4 = a[int(4*l/10)]
+	b5 = a[int(l/2)]
+	b6 = a[int(6*l/10)]
+	b7 = a[int(7*l/10)]
+	b8 = a[int(8*l/10)]
+	b9 = a[int(9*l/10)]'''
+
+	'''b1 = a[int(l/8)]
+	b2 = a[int(l/4)]
+	b3 = a[int(3*l/8)]
+	b4 = a[int(l/2)]
+	b5 = a[int(5*l/8)]
+	b6 = a[int(6*l/8)]
+	b7 = a[int(7*l/8)]'''
+
+	'''b1 = a[int(l/6)]
+	b2 = a[int(l/3)]
+	b3 = a[int(3*l/6)]
+	b4 = a[int(4*l/6)]
+	b5 = a[int(5*l/6)]'''
+
+	'''b1 = a[int(l/12)]
+	b2 = a[int(l/6)]
+	b3 = a[int(l/4)]
+	b4 = a[int(l/3)]
+	b5 = a[int(5*l/12)]
+	b6 = a[int(l/2)]
+	b7 = a[int(7*l/12)]
+	b8 = a[int(8*l/12)]
+	b9 = a[int(9*l/12)]
+	b10 = a[int(10*l/12)]
+	b11 = a[int(11*l/12)]'''
+
+
+	bin_list = [-np.inf,b1,max_value]
 	bin_list = sorted(list(set(bin_list)))
 	print bin_list
 	label = []
@@ -67,7 +106,11 @@ args = parser.parse_args()
 selected_features = args.input
 
 if selected_features == None:
-	selected_features = [98, 30, 119, 24, 57, 55, 12, 14]
+	selected_features = [6, 72, 74, 75, 76, 58, 115, 21]
+	# SFM 6,8,79,80,109,125,126,129
+	# I 113,15,13,82,54,56,47,21
+	# k 18,16,125,51,44,3,17
+	# 18,30,52,32,33,127,87,39
 else:
 	selected_features = eval(selected_features)
 	
@@ -81,6 +124,7 @@ for i in selected_features:
 
 features = []
 features.append(('student','currProb','course','session','priorTutorAction','reward','feature1','feature2','feature3','feature4','feature5','feature6','feature7','feature8'))
+#features.append(('student','currProb','course','session','priorTutorAction','reward','feature1','feature2','feature3','feature4','feature5','feature6'))
 #features.append(('feature1','feature2','feature3','feature4','feature5','feature6','feature7','feature8'))
 #119, 120, 57, 74, 123, 12, 106, 30
 
@@ -93,6 +137,7 @@ csv_file.close()
 
 for j in range(len(discretized_features[0])):
 		features.append((list(existing_features[j+1])+list((discretized_features[0][j],discretized_features[1][j],discretized_features[2][j],discretized_features[3][j],discretized_features[4][j],discretized_features[5][j],discretized_features[6][j],discretized_features[7][j]))))
+		#features.append((list(existing_features[j+1])+list((discretized_features[0][j],discretized_features[1][j],discretized_features[2][j],discretized_features[3][j],discretized_features[4][j],discretized_features[5][j]))))
 		#features.append(((discretized_features[0][j],discretized_features[1][j],discretized_features[2][j],discretized_features[3][j],discretized_features[4][j],discretized_features[5][j],discretized_features[6][j],discretized_features[7][j])))
 
 with open('discretized_output.csv','w') as out:
